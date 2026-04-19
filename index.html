@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countries API</title>
+  <style>
+    body {
+      font-family: Arial;
+    }
+    li {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    img {
+      width: 30px;
+      height: 20px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Countries List 🌍</h1>
+<ul id="countries"></ul>
+
+<script>
+fetch("https://restcountries.com/v3.1/all?fields=name,flags")
+.then(res => res.json())
+.then(data => {
+  let list = document.getElementById("countries");
+
+  data.slice(0, 15).forEach(country => {
+    let li = document.createElement("li");
+
+    li.innerHTML = `
+      ${country.name.common}
+      <img src="${country.flags.png}" />
+    `;
+
+    list.appendChild(li);
+  });
+});
+</script>
+
+</body>
+</html>
