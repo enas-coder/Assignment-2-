@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countries API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            font-size: 18px;
+            color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Country List</h1>
+    <button onclick="getCountries()">Show Countries</button>
+    <ul id="countryList"></ul>
+
+    <script>
+        async function getCountries() {
+            const response = await fetch("https://restcountries.com/v3.1/all");
+            const data = await response.json();
+
+            const list = document.getElementById("countryList");
+            list.innerHTML = "";
+
+            data.slice(0, 10).forEach(country => {
+                const li = document.createElement("li");
+                li.textContent = country.name.common;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
